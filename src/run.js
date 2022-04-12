@@ -1,8 +1,10 @@
 import dotenv from 'dotenv'
+import { dailyRequest } from './scripts/requests.js'
 dotenv.config()
 
 const app = async () => {
-  console.log(`Hello ${process.env.SECRET_MESSAGE}`)
+  const timeSeries = await dailyRequest()
+  console.log(timeSeries)
 }
 
 try {
