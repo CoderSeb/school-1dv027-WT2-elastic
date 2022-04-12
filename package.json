@@ -1,0 +1,21 @@
+{
+  "name": "elastic-population",
+  "version": "1.0.0",
+  "description": "Populate elasticsearch",
+  "main": "src/run.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/run.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:1dv027/student/sa224ny/assignment-wt2/elastic-population.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0"
+  }
+}
