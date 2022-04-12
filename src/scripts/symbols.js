@@ -3,8 +3,5 @@ export default [
   'MSFT',
   'GOOGL',
   'AMZN',
-  'FB',
-  'TWTR',
-  'NFLX',
-  'TSLA'
+  'NFLX'
 ]
