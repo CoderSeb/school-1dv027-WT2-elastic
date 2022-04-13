@@ -1,25 +1,18 @@
-import { Client } from '@elastic/elasticsearch'
-import fs from 'fs-extra'
-const client = new Client({
-  node: 'https://localhost:9200',
-  auth: {
-    username: process.env.ELASTIC_USERNAME,
-    password: process.env.ELASTIC_PASSWORD
-  },
-  tls: {
-    ca: fs.readFileSync(`${process.env.CERT_PATH}`),
-    rejectUnauthorized: false
-  }
-})
+import { loadClient } from './loadClient.js'
+import { testElastic } from './testElastic.js'
 
 export const populateElastic = async (data) => {
+  console.log('Testing connection to Elasticsearch...')
+  await testElastic()
+  const client = loadClient()
   const index = 'stocksdata'
   try {
+    console.log('Creating index...')
     await client.indices.create({
       index: index
     })
   } catch (e) {
-    console.log(`Index ${index} already exists`)
+    console.log(`Index ${index} already exists.`)
   }
 
   const body = addIndex(data, index)
