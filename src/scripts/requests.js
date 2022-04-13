@@ -4,9 +4,9 @@ export const dailyRequest = async () => {
   let timeSeries = []
   const url = new URL(process.env.ALPHA_API_URL)
   for (let i = 0; i < symbols.length; i++) {
-    if (i % 2 === 0 && i !== 0) {
-      console.log('Sleeping for 15 seconds to not overload the api...')
-      await sleeper(15000)
+    if (i % 5 === 0 && i !== 0) {
+      console.log('Sleeping for one minute...')
+      await sleeper(61000)
       console.log('Moving on!')
     }
     console.log(`Fetching data for ${symbols[i]}`)
@@ -25,11 +25,12 @@ export const dailyRequest = async () => {
       throw new Error(response.message)
     }
     const data = await response.json()
-
     let days = []
     for (const [key, value] of Object.entries(data['Time Series (Daily)'])) {
       const day = {
-        date: key,
+        id: `${data['Meta Data']['2. Symbol']}--${key}`,
+        symbol: data['Meta Data']['2. Symbol'],
+        date: new Date(key),
         open: parseInt(value['1. open']),
         high: parseInt(value['2. high']),
         low: parseInt(value['3. low']),
@@ -39,16 +40,9 @@ export const dailyRequest = async () => {
       days.push(day)
     }
 
-    let stock = {
-      id: `${data['Meta Data']['2. Symbol']}--${data['Meta Data']['3. Last Refreshed']}--${data['Meta Data']['5. Time Zone']}`,
-      symbol: data['Meta Data']['2. Symbol'],
-      lastRefreshed: data['Meta Data']['3. Last Refreshed'],
-      timeZone: data['Meta Data']['5. Time Zone'],
-      stockPrices: days
-    }
-
-    timeSeries.push(stock)
-    console.log(`Data for ${symbols[i]} added to workbench`)
+    timeSeries.push(...days)
+    console.log(`Data for ${symbols[i]} added to workbench.`)
+    console.log(`${timeSeries.length} entries in workbench.`)
   }
   return timeSeries
 }

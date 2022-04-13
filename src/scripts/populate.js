@@ -42,7 +42,8 @@ export const populateElastic = async (data) => {
 const addIndex = (data, index) => {
   const indexedData = data.flatMap(obj => [
     {index: {
-      _index: index
+      _index: index,
+      _id: obj.id
     }}, obj
   ])
   return indexedData
