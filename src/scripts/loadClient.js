@@ -1,6 +1,11 @@
 import { Client } from '@elastic/elasticsearch'
 import fs from 'fs-extra'
 
+/**
+ * Function to create and elasticsearch Client.
+ *
+ * @returns {Client} as the elasticsearch client.
+ */
 export const loadClient = () => {
   const devOptions = {
     node: process.env.ELASTIC_DEVELOPMENT_URL,

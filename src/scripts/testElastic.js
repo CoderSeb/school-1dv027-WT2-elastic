@@ -3,6 +3,11 @@
 import { Client } from '@elastic/elasticsearch'
 import Mock from '@elastic/elasticsearch-mock'
 import fs from 'fs-extra'
+
+/**
+ * Test function taken from the source mentioned above, 
+ * simple GET method to check if the connection is alive.
+ */
 export const testElastic = async () => {
   const mock = new Mock()
   const client = new Client({

@@ -1,6 +1,11 @@
 import { loadClient } from './loadClient.js'
 import { testElastic } from './testElastic.js'
 
+/**
+ * Function to create index and populate elasticsearch with the data fetched from the api.
+ *
+ * @param {Object[]} data as the data to be indexed on elasticsearch.
+ */
 export const populateElastic = async (data) => {
   console.log('Testing connection to Elasticsearch...')
   await testElastic()

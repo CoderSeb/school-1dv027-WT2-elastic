@@ -1,12 +1,18 @@
 import fetch from 'node-fetch'
 import symbols from './symbols.js'
+
+/**
+ * Request function to fetch data from the Alpha Advantage API.
+ *
+ * @returns {Object[]}  Array of objects containing the time series data.
+ */
 export const dailyRequest = async () => {
   let timeSeries = []
   const url = new URL(process.env.ALPHA_API_URL)
   for (let i = 0; i < symbols.length; i++) {
     if (i % 5 === 0 && i !== 0) {
       console.log('Sleeping for one minute...')
-      await sleeper(61000)
+      await sleeper(61000) // Api limit is 5 requests per minute.
       console.log('Moving on!')
     }
     console.log(`Fetching data for ${symbols[i]}`)
@@ -47,6 +53,12 @@ export const dailyRequest = async () => {
   return timeSeries
 }
 
+/**
+ * Sleeper function.
+ *
+ * @param {number} time as the time in milliseconds.
+ * @return {Promise<any>} resolved when time has passed.
+ */
 const sleeper = async (time) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

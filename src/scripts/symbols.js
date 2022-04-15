@@ -1,3 +1,7 @@
+/**
+* File for wanted stocksymbols.
+*/
+
 export default [
   'AAPL',
   'MSFT',
