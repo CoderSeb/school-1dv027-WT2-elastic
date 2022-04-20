@@ -6,7 +6,6 @@ import { dailyRequest } from './scripts/requests.js'
  */
 const app = async () => {
   const timeSeries = await dailyRequest()
-  //const timeSeries = JSON.parse(fs.readFileSync('src/mock/mockedTimeSeries.json'))
   await populateElastic(timeSeries)
 }
 
