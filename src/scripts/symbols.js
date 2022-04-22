@@ -10,5 +10,6 @@ export default [
   'NFLX',
   'FB',
   'TSLA',
-  'KO'
+  'KO',
+  'NVDA'
 ]
